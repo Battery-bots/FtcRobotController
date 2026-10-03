@@ -10,6 +10,8 @@ public class MecanumTeleOp extends OpMode {
     DcMotor frontRightDrive;
     DcMotor backLeftDrive;
     DcMotor backRightDrive;
+    DcMotor intakeMotor;
+    boolean intakeOn = false;
 
     @Override
     public void init(){
@@ -18,7 +20,8 @@ public class MecanumTeleOp extends OpMode {
         frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");
         frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
         backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
-        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
+        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");9
+        intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
 
     }
 
