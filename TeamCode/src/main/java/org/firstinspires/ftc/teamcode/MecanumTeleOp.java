@@ -20,7 +20,7 @@ public class MecanumTeleOp extends OpMode {
         frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");
         frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
         backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
-        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");9
+        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
         intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
 
     }
