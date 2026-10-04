@@ -11,7 +11,6 @@ public class MecanumTeleOp extends OpMode {
     DcMotor backLeftDrive;
     DcMotor backRightDrive;
     DcMotor intakeMotor;
-    boolean intakeOn = false;
 
     @Override
     public void init(){
@@ -25,12 +24,15 @@ public class MecanumTeleOp extends OpMode {
 
     }
 
+    @Override
     public void loop(){
         // Mecanum drive is controlled with three axes: drive (front-and-back),
         // strafe (left-and-right), and twist (rotating the whole chassis).
+        // boolean value checks if intake is on or off
         double drive = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x;
         double turn = gamepad1.right_stick_x;
+        boolean intakeOn = false;
 
 
         // You may need to multiply some of these by -1 to invert direction of
@@ -45,14 +47,20 @@ public class MecanumTeleOp extends OpMode {
         // Loop through all values in the speeds[] array and find the greatest
         // *magnitude*.  Not the greatest velocity.
         double max = Math.abs(power[0]);
-        for(int i = 0; i < power.length; i++) {
-            if ( max < Math.abs(power[i]) ) max = Math.abs(power[i]);
+        for (int i = 0; i < power.length; i++) {
+
+            if ( max < Math.abs(power[i]) )
+                max = Math.abs(power[i]);
+
         }
 
-        // If and only if the maximum is outside of the range we want it to be,
+        // If and only if the maximum is outside the range we want it to be,
         // normalize all the other speeds based on the given speed value.
         if (max > 1) {
-            for (int i = 0; i < power.length; i++) power[i] /= max;
+
+            for (int i = 0; i < power.length; i++)
+                power[i] /= max;
+
         }
 
         // apply the calculated values to the motors.
