@@ -11,6 +11,8 @@ public class MecanumTeleOp extends OpMode {
     DcMotor backLeftDrive;
     DcMotor backRightDrive;
     DcMotor intakeMotor;
+    boolean intakeOn = false;
+    boolean lastA = false;
 
     @Override
     public void init(){
@@ -32,7 +34,6 @@ public class MecanumTeleOp extends OpMode {
         double drive = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x;
         double turn = gamepad1.right_stick_x;
-        boolean intakeOn = false;
 
 
         // You may need to multiply some of these by -1 to invert direction of
@@ -68,6 +69,19 @@ public class MecanumTeleOp extends OpMode {
         frontRightDrive.setPower(power[1]);
         backLeftDrive.setPower(power[2]);
         backRightDrive.setPower(power[3]);
+
+        if (gamepad1.a && !lastA){
+            intakeOn = !intakeOn;
+        }
+        lastA = gamepad1.a;
+
+        if (intakeOn){
+            intakeMotor.setPower(1.0);
+        }
+        else {
+            intakeMotor.setPower(0);
+            intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        }
 
     }
 }

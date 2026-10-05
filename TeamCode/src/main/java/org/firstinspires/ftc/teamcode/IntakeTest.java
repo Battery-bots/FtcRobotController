@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp //ensures program shows up in Teleop screen
 public class IntakeTest extends OpMode {
     DcMotor intakeMotor;
+    boolean intakeOn = false;
+    boolean aState = false;
 
     @Override
     public void init(){
@@ -18,8 +20,7 @@ public class IntakeTest extends OpMode {
 
     @Override
     public void loop(){
-        boolean intakeOn = false;
-        boolean aState = false;
+
         double intakePower = 1.0; // Power of the motor is at 100%
         int motorPos = intakeMotor.getCurrentPosition();
         double ticksPerRev = intakeMotor.getMotorType().getTicksPerRev();
@@ -32,7 +33,6 @@ public class IntakeTest extends OpMode {
         aState = gamepad1.a;
 
         // if intake is true, the motor is set to assigned power
-        // Otherwise, motor is set to 0 and brakes
         if (intakeOn){
             intakeMotor.setPower(intakePower);
         }
@@ -40,7 +40,6 @@ public class IntakeTest extends OpMode {
             intakeMotor.setPower(0);
             intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
-
         // returns data of the intake
         telemetry.addData("Intake On", intakeOn);
         telemetry.addData("Intake Revs", motorPos/ ticksPerRev);
