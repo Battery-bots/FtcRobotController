@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 //imports qualcom libraries
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp //ensures program shows up in Teleop screen
+@Disabled //ensures program shows up in Teleop screen
 public class IntakeTest extends OpMode {
     DcMotor intakeMotor;
     boolean intakeOn = false;
