@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
  * Made outside the club probably
  * Maybe
  */
-@TeleOp
+@TeleOp (name="Main TeleOp", group="buzz")
 public class BetterMecanumTeleOp extends OpMode {
     // calls drive object from MecanumDrive class
     MecanumDrive drive = new MecanumDrive();
