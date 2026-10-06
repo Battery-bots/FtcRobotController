@@ -19,6 +19,7 @@ public class BetterMecanumTeleOp extends OpMode {
     MecanumDrive drive = new MecanumDrive();
     // calls intake object from Intake class
     Intake intake = new Intake();
+
     double forward;
     double strafe;
     double rotate;
@@ -40,7 +41,7 @@ public class BetterMecanumTeleOp extends OpMode {
         rotate = gamepad1.right_stick_x;
 
         // function for mecanum drive
-        drive.drive(forward, strafe, rotate);
+        drive.driveFieldRelative(forward, strafe, rotate);
 
         // if statement that toggles intake if A is pressed, NOT held
         if (gamepad1.a && !lastA) {
