@@ -15,8 +15,9 @@ import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
  */
 @TeleOp
 public class BetterMecanumTeleOp extends OpMode {
-    // calls drive object from Mecanum drive class
+    // calls drive object from MecanumDrive class
     MecanumDrive drive = new MecanumDrive();
+    // calls intake object from Intake class
     Intake intake = new Intake();
     double forward;
     double strafe;

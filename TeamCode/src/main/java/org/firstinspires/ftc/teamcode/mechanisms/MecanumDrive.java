@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.mechanisms;
 
-import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -30,7 +29,7 @@ public class MecanumDrive {
         backLeft.setDirection(DcMotor.Direction.REVERSE);
 
         // Runs motors using encoders
-        // used to make movement more accurate (usuallly for auto, but idk if it would be useful in
+        // used to make movement more accurate (usually for auto, but idk if it would be useful in
         // teleop
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -45,6 +44,8 @@ public class MecanumDrive {
         RevHubOrientationOnRobot RevOrientation = new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
+
+        imu.initialize(new IMU.Parameters(RevOrientation));
     }
 
     public void drive(double forward, double strafe, double rotate){
