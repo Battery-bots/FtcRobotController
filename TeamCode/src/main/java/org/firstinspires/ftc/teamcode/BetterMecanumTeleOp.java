@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
  * The program will allow the robot to drive field relative in order to aim and drive
  * the robot with much more accuracy.
  * Made outside the club probably
- * Maybe
  */
 @TeleOp (name="Main TeleOp", group="buzz")
 public class BetterMecanumTeleOp extends OpMode {
@@ -26,6 +25,7 @@ public class BetterMecanumTeleOp extends OpMode {
     boolean intakeOn = false;
     boolean lastA = false;
 
+    @Override
     public void init(){
         telemetry.addData("Controller 1", "Press A + Start to initialize!");
 
@@ -34,6 +34,7 @@ public class BetterMecanumTeleOp extends OpMode {
         intake.init(hardwareMap);
     }
 
+    @Override
     public void loop(){
         // variables for wheels
         forward = gamepad1.left_stick_y;
@@ -58,5 +59,7 @@ public class BetterMecanumTeleOp extends OpMode {
 
         lastA = gamepad1.a; // variable to track if A button is being held
 
+        telemetry.addData("Intake On", intakeOn);
+        telemetry.update();
     }
 }

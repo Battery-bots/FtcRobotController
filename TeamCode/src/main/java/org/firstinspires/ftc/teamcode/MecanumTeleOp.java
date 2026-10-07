@@ -5,6 +5,12 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+/*
+ * Original Mecanum drive program
+ * Robot oriented drive
+ * No other classes used
+ * Outdated, but should be tested and presented as an example
+ */
 @TeleOp (name = "Test TeleOp", group = "Testing")
 public class MecanumTeleOp extends OpMode {
     DcMotor frontLeftDrive;
