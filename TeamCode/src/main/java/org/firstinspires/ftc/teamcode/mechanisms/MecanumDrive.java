@@ -109,4 +109,20 @@ public class MecanumDrive {
         imu.resetYaw();
 
     }
+
+    // returns the angle the robot is facing
+    public double returnAngle(){
+        double angle = imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
+
+        // normalizes the angle (imu measures angles over 360 and under 0
+        angle = angle % 360;
+        if (angle < 0){
+
+            angle += 360;
+
+        }
+
+        return angle;
+
+    }
 }

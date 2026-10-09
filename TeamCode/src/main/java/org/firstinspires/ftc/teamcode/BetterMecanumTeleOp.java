@@ -48,7 +48,6 @@ public class BetterMecanumTeleOp extends OpMode {
         }
 
         // manually resets orientation if drifting
-        // robot must be up against a wall
         if (gamepad1.b) {
 
             drive.resetOrientation();
@@ -69,6 +68,7 @@ public class BetterMecanumTeleOp extends OpMode {
         drive.driveFieldRelative(forward, strafe, rotate);
 
         telemetry.addData("Intake On", intakeOn);
+        telemetry.addData("Angle", drive.returnAngle());
         telemetry.update();
     }
 }
