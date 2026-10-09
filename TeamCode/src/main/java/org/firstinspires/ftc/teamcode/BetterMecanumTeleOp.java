@@ -39,7 +39,7 @@ public class BetterMecanumTeleOp extends OpMode {
     public void loop(){
         // variables for wheels
         forward = gamepad1.left_stick_y;
-        strafe = gamepad1.left_stick_x;
+        strafe = -gamepad1.left_stick_x;
         rotate = gamepad1.right_stick_x;
 
         // if statement that toggles intake if A is pressed, NOT held

@@ -8,11 +8,7 @@ import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
 import org.firstinspires.ftc.teamcode.mechanisms.MecanumDriveTest;
 
 /*
- * Experiment for Mecanum drive
- * The program will allow the robot to drive field relative in order to aim and drive
- * the robot with much more accuracy.
- * Made outside the club probably
- * Maybe
+ * Will be deleted after tested
  */
 @TeleOp (name="Test 2 TeleOp", group="test")
 public class BetterMecanumTeleOp2 extends OpMode {
@@ -39,8 +35,8 @@ public class BetterMecanumTeleOp2 extends OpMode {
     @Override
     public void loop(){
         // variables for wheels
-        forward = -gamepad1.left_stick_y;
-        strafe = gamepad1.left_stick_x;
+        forward = gamepad1.left_stick_y;
+        strafe = -gamepad1.left_stick_x;
         rotate = gamepad1.right_stick_x;
 
         // if statement that toggles intake if A is pressed, NOT held
