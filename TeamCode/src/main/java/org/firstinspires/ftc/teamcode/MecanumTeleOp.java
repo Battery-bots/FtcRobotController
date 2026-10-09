@@ -41,7 +41,7 @@ public class MecanumTeleOp extends OpMode {
         // Mecanum drive is controlled with three axes: drive (front-and-back),
         // strafe (left-and-right), and twist (rotating the whole chassis).
         // boolean value checks if intake is on or off
-        double drive = -gamepad1.left_stick_y;
+        double drive = gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x;
         double turn = gamepad1.right_stick_x;
 
