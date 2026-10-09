@@ -42,16 +42,21 @@ public class BetterMecanumTeleOp extends OpMode {
         strafe = gamepad1.left_stick_x;
         rotate = gamepad1.right_stick_x;
 
-        // function for mecanum drive
-        drive.driveFieldRelative(forward, strafe, rotate);
-
         // if statement that toggles intake if A is pressed, NOT held
         if (gamepad1.a && !lastA) {
             intakeOn = !intakeOn;
         }
 
+        // manually resets orientation if drifting
+        // robot must be up against a wall
+        if (gamepad1.b) {
+
+            drive.resetOrientation();
+
+        }
+
         // Toggles intake
-        if (intakeOn){
+        if (intakeOn) {
             intake.intakeOn();
         }
         else {
@@ -59,6 +64,9 @@ public class BetterMecanumTeleOp extends OpMode {
         }
 
         lastA = gamepad1.a; // variable to track if A button is being held
+
+        // function for mecanum drive
+        drive.driveFieldRelative(forward, strafe, rotate);
 
         telemetry.addData("Intake On", intakeOn);
         telemetry.update();

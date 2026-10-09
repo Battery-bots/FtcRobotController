@@ -46,27 +46,41 @@ public class MecanumDrive {
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD);
 
         imu.initialize(new IMU.Parameters(RevOrientation));
+        resetOrientation();
     }
 
     public void drive(double forward, double strafe, double rotate){
-        double frontLeftPower = forward + strafe + rotate;
-        double frontRightPower = forward - strafe - rotate;
-        double backRightPower = forward + strafe - rotate;
-        double backLeftPower = forward - strafe + rotate;
-        double maxPower = 1.0;
+        double[] power = {
+                (forward + strafe + rotate), //front left power
+                (forward - strafe + rotate), // back left power
+                (forward - strafe - rotate), // front right power
+                (forward + strafe - rotate) // back right power
+        };
 
         // loops through power to find greatest magnitude of power
-        maxPower = Math.max(maxPower, Math.abs(frontLeftPower));
-        maxPower = Math.max(maxPower, Math.abs(frontRightPower));
-        maxPower = Math.max(maxPower, Math.abs(backRightPower));
-        maxPower = Math.max(maxPower, Math.abs(backLeftPower));
+        double max = 0;
+        for (double v : power) {
 
+            if (max < Math.abs(v)) {
+                max = Math.abs(v);
+            }
 
+        }
 
-        frontLeft.setPower(frontLeftPower/maxPower);
-        backLeft.setPower(backLeftPower/maxPower);
-        frontRight.setPower(frontRightPower/maxPower);
-        backRight.setPower(backRightPower/maxPower);
+        // if max speed goes over threshold of 1,
+        // we correct the speed by normalizing it
+        if (max > 1) {
+
+            for (int i = 0; i < power.length; i++){
+                power[i] /= max;
+            }
+
+        }
+
+        frontLeft.setPower(power[0]);
+        backLeft.setPower(power[1]);
+        frontRight.setPower(power[2]);
+        backRight.setPower(power[3]);
 
     }
 
@@ -87,5 +101,12 @@ public class MecanumDrive {
 
         // calls drive function to move motors based on newly calculated forward, strafe variables
         this.drive(newForward, newStrafe, rotate);
+    }
+
+    // resets orientation to avoid drift
+    public void resetOrientation(){
+
+        imu.resetYaw();
+
     }
 }

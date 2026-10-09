@@ -25,10 +25,10 @@ public class MecanumTeleOp extends OpMode {
     public void init(){
         telemetry.addData("Controller 1", "Press A + Start");
 
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_drive");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_drive");
-        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_drive");
+        frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_motor");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_motor");
+        backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_motor");
+        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_motor");
         intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
 
         frontLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
