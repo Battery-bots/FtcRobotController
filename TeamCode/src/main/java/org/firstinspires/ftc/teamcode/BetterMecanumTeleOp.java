@@ -25,6 +25,7 @@ public class BetterMecanumTeleOp extends OpMode {
     double rotate;
     boolean intakeOn = false;
     boolean lastA = false;
+    boolean lastB = false;
 
     @Override
     public void init(){
@@ -48,7 +49,7 @@ public class BetterMecanumTeleOp extends OpMode {
         }
 
         // manually resets orientation if drifting
-        if (gamepad1.b) {
+        if (gamepad1.b && !lastB) {
 
             drive.resetOrientation();
 
@@ -63,6 +64,7 @@ public class BetterMecanumTeleOp extends OpMode {
         }
 
         lastA = gamepad1.a; // variable to track if A button is being held
+        lastB = gamepad1.b;
 
         // function for mecanum drive
         drive.driveFieldRelative(forward, strafe, rotate);
