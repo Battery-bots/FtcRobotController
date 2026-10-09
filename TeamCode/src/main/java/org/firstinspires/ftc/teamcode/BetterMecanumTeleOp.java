@@ -38,7 +38,7 @@ public class BetterMecanumTeleOp extends OpMode {
     @Override
     public void loop(){
         // variables for wheels
-        forward = -gamepad1.left_stick_y;
+        forward = gamepad1.left_stick_y;
         strafe = gamepad1.left_stick_x;
         rotate = gamepad1.right_stick_x;
 
