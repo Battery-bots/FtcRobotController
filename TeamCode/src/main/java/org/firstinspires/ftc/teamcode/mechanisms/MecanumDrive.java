@@ -122,6 +122,10 @@ public class MecanumDrive {
 
         }
 
+        if (angle >= 359.95){
+            angle = 0;
+        }
+
         return angle;
 
     }
