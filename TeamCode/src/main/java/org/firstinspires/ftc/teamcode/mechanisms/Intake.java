@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Intake {
 
     private DcMotor intakeMotor;
+    double max = 0.8;
 
     // initializes the hardware motor
     public void init(HardwareMap hwMap){
@@ -26,7 +27,6 @@ public class Intake {
     // If intake is on, sets motor to full power
     public void intakeOn(){
 
-        double max = 1.0;
         intakeMotor.setPower(max);
 
     }
@@ -36,5 +36,14 @@ public class Intake {
 
         intakeMotor.setPower(0);
 
+    }
+
+    public void reverse(){
+        intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+        intakeMotor.setPower(.6);
+    }
+    public void forward(){
+        intakeMotor.setDirection(DcMotor.Direction.REVERSE);
+        intakeMotor.setPower(max);
     }
 }

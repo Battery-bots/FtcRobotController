@@ -3,7 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.teamcode.mechanisms.Intake;
+import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
 
 /*
  * Original Mecanum drive program
@@ -13,10 +15,11 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  */
 @TeleOp (name = "Test TeleOp", group = "Testing")
 public class MecanumTeleOp extends OpMode {
-    DcMotor frontLeftDrive;
-    DcMotor frontRightDrive;
-    DcMotor backLeftDrive;
-    DcMotor backRightDrive;
+    MecanumDrive drive = new MecanumDrive();
+    Intake intake = new Intake();
+    double forward;
+    double strafe;
+    double turn;
     DcMotor intakeMotor;
     boolean intakeOn = false;
     boolean lastA = false;
@@ -25,15 +28,8 @@ public class MecanumTeleOp extends OpMode {
     public void init(){
         telemetry.addData("Controller 1", "Press A + Start");
 
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "front_left_motor");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_motor");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "back_left_motor");
-        backRightDrive = hardwareMap.get(DcMotor.class, "back_right_motor");
-        intakeMotor = hardwareMap.get(DcMotor.class, "intake_motor");
-
-        frontLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        backLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-
+        drive.init(hardwareMap);
+        intake.init(hardwareMap);
     }
 
     @Override
@@ -41,56 +37,29 @@ public class MecanumTeleOp extends OpMode {
         // Mecanum drive is controlled with three axes: drive (front-and-back),
         // strafe (left-and-right), and twist (rotating the whole chassis).
         // boolean value checks if intake is on or off
-        double drive = gamepad1.left_stick_y;
-        double strafe = -gamepad1.left_stick_x;
-        double turn = gamepad1.right_stick_x;
+        forward = gamepad1.left_stick_y;
+        strafe = -gamepad1.left_stick_x;
+        turn = -gamepad1.right_stick_x;
+        drive.drive(forward, strafe, turn);
 
 
-        // You may need to multiply some of these by -1 to invert direction of
-        // the motor.  This is not an issue with the calculations themselves.
-        double[] power = {
-                (drive + strafe + turn),
-                (drive - strafe - turn),
-                (drive - strafe + turn),
-                (drive + strafe - turn)
-        };
-
-        // Loop through all values in the speeds[] array and find the greatest
-        // *magnitude*.  Not the greatest velocity.
-        double max = Math.abs(power[0]);
-        for (int i = 0; i < power.length; i++) {
-
-            if ( max < Math.abs(power[i]) )
-                max = Math.abs(power[i]);
-
-        }
-
-        // If and only if the maximum is outside the range we want it to be,
-        // normalize all the other speeds based on the given speed value.
-        if (max > 1) {
-
-            for (int i = 0; i < power.length; i++)
-                power[i] /= max;
-
-        }
-
-        // apply the calculated values to the motors.
-        frontLeftDrive.setPower(power[0]);
-        frontRightDrive.setPower(power[1]);
-        backLeftDrive.setPower(power[2]);
-        backRightDrive.setPower(power[3]);
 
         if (gamepad1.a && !lastA){
             intakeOn = !intakeOn;
         }
         lastA = gamepad1.a;
 
-        if (intakeOn){
-            intakeMotor.setPower(1.0);
+        if (intakeOn) {
+            intake.intakeOn();
+            if (gamepad1.left_bumper){
+                intake.reverse();
+            }
+            else{
+                intake.forward();
+            }
         }
         else {
-            intakeMotor.setPower(0);
-            intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            intake.intakeOff();
         }
 
     }
