@@ -15,8 +15,8 @@ public class DriveForwardAuto extends LinearOpMode {
     MecanumDrive drive = new MecanumDrive();
 
     // how far to drive (inches). Negative = backward
-    static final double FORWARD_INCHES = 24;
-    static final double BACKWARD_INCHES = -12;
+    static final double FORWARD_INCHES = -24;
+    static final double BACKWARD_INCHES = 12;
     // speed cap for the wheels in RPM. Start low and raise it once it works
     static final double SAFE_WHEEL_RPM = 100;
     // max seconds each move can take before giving up
@@ -26,7 +26,7 @@ public class DriveForwardAuto extends LinearOpMode {
     public void runOpMode(){
         drive.init(hardwareMap);
 
-        telemetry.addData("Status", "Ready, press Play");
+        telemetry.addData("Stats", "Ready, press Play");
         telemetry.update();
 
         // waits for the play button on the driver station
