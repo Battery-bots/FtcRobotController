@@ -72,6 +72,12 @@ public class BetterMecanumTeleOp extends OpMode {
 
         if (gamepad1.left_bumper){
             intake.reverse();
+            if (gamepad1.left_bumper){
+                intake.reverse();
+            }
+            else{
+                intake.forward();
+            }
         }
         else{
             intake.forward();
