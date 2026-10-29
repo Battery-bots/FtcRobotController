@@ -55,23 +55,10 @@ public class BetterMecanumTeleOp extends OpMode {
 
         }
 
-        if (intakeOn) {
-            intake.intakeOn();
-        }
-        else {
-            intake.intakeOff();
-        }
 
         // Toggles intake
         if (intakeOn) {
             intake.intakeOn();
-        }
-        else {
-            intake.intakeOff();
-        }
-
-        if (gamepad1.left_bumper){
-            intake.reverse();
             if (gamepad1.left_bumper){
                 intake.reverse();
             }
@@ -79,8 +66,8 @@ public class BetterMecanumTeleOp extends OpMode {
                 intake.forward();
             }
         }
-        else{
-            intake.forward();
+        else {
+            intake.intakeOff();
         }
 
         lastA = gamepad1.a; // variable to track if A button is being held
