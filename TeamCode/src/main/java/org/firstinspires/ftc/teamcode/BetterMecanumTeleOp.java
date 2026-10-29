@@ -59,19 +59,19 @@ public class BetterMecanumTeleOp extends OpMode {
         // Toggles intake
         if (intakeOn) {
             intake.intakeOn();
-            if (gamepad1.left_bumper){
+
+            // reverses intake
+            if (gamepad1.left_bumper)
                 intake.reverse();
-            }
-            else{
+            else
                 intake.forward();
-            }
         }
         else {
             intake.intakeOff();
         }
 
         lastA = gamepad1.a; // variable to track if A button is being held
-        lastB = gamepad1.b;
+        lastB = gamepad1.b; // resets yaw (in case of drift)
 
         // function for mecanum drive
         drive.driveFieldRelative(forward, strafe, rotate);
